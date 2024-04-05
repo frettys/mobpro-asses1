@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Expense Calculator</string>
+    <string name="expense_intro">Ayo mulai hitung pengeluaranmu!</string>
+    <string name="income">Pemasukan</string>
+    <string name="expense">Pengeluaran</string>
+    <string name="kategori">Kategori Pengeluaran</string>
+    <string name="hitung">Hitung Pengeluaran</string>
 </resources>
