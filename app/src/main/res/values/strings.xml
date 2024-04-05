@@ -13,4 +13,9 @@
     <string name="aman">Senang membantumu!</string>
     <string name="tidak_aman">Anda mungkin harus berhemat dari \nsekarang!</string>
     <string name="input_invalid">Tidak boleh kosong.</string>
+    <string name="tentang_aplikasi">Tentang Aplikasi</string>
+    <string name="copyright">Expense Calculator merupakan aplikasi Android
+    untuk membantumu dalam menghitung pengeluaran harianmu. Expense Calculator
+    memudahkanmu dalam mengelola pengeluaranmu.\n\nCopyright © 2024.\nAll rights
+    reserved.</string>
 </resources>
