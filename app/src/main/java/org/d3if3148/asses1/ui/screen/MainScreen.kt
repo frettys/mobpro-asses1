@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -24,6 +25,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -68,6 +70,7 @@ fun ScreenContent(modifier: Modifier) {
         stringResource(id = R.string.fnd),
         stringResource(id = R.string.daily)
     )
+    var total by remember { mutableFloatStateOf(0f) }
     var kategori by remember { mutableStateOf(radioOptions[0]) }
 
     Column (
@@ -125,12 +128,40 @@ fun ScreenContent(modifier: Modifier) {
                 )
             }
         }
-        Button(
-            onClick = {},
-            modifier = Modifier.padding(top = 8.dp),
-            contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Text(text = stringResource(R.string.hitung))
+            Button(
+                onClick = {
+                    total = hitungPengeluaran(inc.toFloat(), exps.toFloat())
+                },
+                modifier = Modifier.padding(top = 8.dp),
+                contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
+            ) {
+                Text(text = stringResource(R.string.hitung))
+            }
+            if (total != 0f) {
+                Divider(
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    thickness = 1.dp
+                )
+                Text(
+                    text = stringResource(R.string.expense_x, total),
+                    style = MaterialTheme.typography.titleLarge,
+                )
+                if (total <= 50000){
+                    Text(
+                        text = stringResource(R.string.tidak_aman),
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                } else {
+                    Text(
+                        text = stringResource(R.string.aman),
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                }
+            }
         }
     }
 }
@@ -148,6 +179,10 @@ fun ExpenseCategory(label: String, isSelected: Boolean, modifier: Modifier) {
             modifier = Modifier.padding(start = 8.dp)
         )
     }
+}
+
+private fun hitungPengeluaran(inc: Float, exps: Float): Float {
+    return inc - exps
 }
 
 @Preview(showBackground = true)

@@ -9,4 +9,7 @@
     <string name="fnd">Makanan dan Minuman</string>
     <string name="daily">Kebutuhan sehari-hari</string>
     <string name="hitung">Hitung Pengeluaran</string>
+    <string name="expense_x">Uang Anda sekarang tersisa:\n%1$s</string>
+    <string name="aman">Senang membantumu!</string>
+    <string name="tidak_aman">Anda mungkin harus berhemat dari \nsekarang!</string>
 </resources>
