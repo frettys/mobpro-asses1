@@ -19,4 +19,7 @@
     memudahkanmu dalam mengelola pengeluaranmu.\n\nCopyright © 2024.\nAll rights
     reserved.</string>
     <string name="kembali">Kembali</string>
+    <string name="bagikan">Bagikan</string>
+    <string name="bagikan_template">Uang saya: %1$s \nTotal uang yang keluar: %2$s
+    \nSisa uang saya: %3$s</string>
 </resources>
