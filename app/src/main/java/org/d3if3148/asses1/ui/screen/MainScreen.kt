@@ -2,6 +2,7 @@ package org.d3if3148.asses1.ui.screen
 
 import android.content.Context
 import android.content.Intent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -32,18 +34,21 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -52,6 +57,23 @@ import org.d3if3148.asses1.R
 import org.d3if3148.asses1.model.Gambar
 import org.d3if3148.asses1.navigation.Screen
 import org.d3if3148.asses1.ui.theme.Asses1Theme
+@Composable
+fun Galeri(gambar: Gambar) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(gambar.imageResId),
+            contentDescription = stringResource(R.string.gambar),
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.size(132.dp)
+        )
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -86,15 +108,6 @@ fun MainScreen(navController: NavHostController){
     }
 }
 
-private fun getData(): List<Gambar>{
-    return listOf(
-        Gambar(R.drawable.thumb_up),
-        Gambar(R.drawable._d_man_hand_giving_gold_coin_with_dollar_symbol_9)
-    )
-}
-
-private val data = getData()
-
 @Composable
 fun ScreenContent(modifier: Modifier) {
     var inc by rememberSaveable { mutableStateOf("") }
@@ -107,7 +120,7 @@ fun ScreenContent(modifier: Modifier) {
         stringResource(id = R.string.fnd),
         stringResource(id = R.string.daily)
     )
-    var total by rememberSaveable { mutableFloatStateOf(0f) }
+    var total by rememberSaveable { mutableIntStateOf(0) }
     var kategori by rememberSaveable { mutableStateOf(radioOptions[0]) }
 
     val  context = LocalContext.current
@@ -183,39 +196,45 @@ fun ScreenContent(modifier: Modifier) {
                     expsError = (exps == "" || exps == "0")
                     if (incError || expsError) return@Button
 
-                    total = hitungPengeluaran(inc.toFloat(), exps.toFloat())
+                    total = hitungPengeluaran(inc.toInt(), exps.toInt())
                 },
                 modifier = Modifier.padding(top = 8.dp),
                 contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
             ) {
                 Text(text = stringResource(R.string.hitung))
             }
-            if (total != 0f) {
+            if (total != 0) {
                 Divider(
                     modifier = Modifier.padding(vertical = 8.dp),
                     thickness = 1.dp
                 )
                 Text(
+                    textAlign = TextAlign.Center,
                     text = stringResource(R.string.expense_x, total),
                     style = MaterialTheme.typography.titleLarge,
                 )
                 if (total <= 50000){
                     Text(
+                        textAlign = TextAlign.Center,
+                        // Image(painter = R.drawable._d_man_hand_giving_gold_coin_with_dollar_symbol_9)
                         text = stringResource(R.string.tidak_aman),
-                        style = MaterialTheme.typography.titleLarge
+                        style = MaterialTheme.typography.titleLarge,
                     )
                 } else {
                     Text(
+                        textAlign = TextAlign.Center,
+                        // Image(imageVector = R.drawable.thumb_up)
                         text = stringResource(R.string.aman),
-                        style = MaterialTheme.typography.titleLarge
+                        style = MaterialTheme.typography.titleLarge,
+
                     )
                 }
                 Button(
                     onClick = {
                         shareData(
                             context = context,
-                            message = context.getString(R.string.bagikan_template),
-                            inc.toFloat(), exps.toFloat(), total,
+                            message = context.getString(R.string.bagikan_template, inc, exps, total.toString(),
+                        )
                         )
                     },
                     modifier = Modifier.padding(top = 8.dp),
@@ -257,11 +276,11 @@ fun ExpenseCategory(label: String, isSelected: Boolean, modifier: Modifier) {
     }
 }
 
-private fun hitungPengeluaran(inc: Float, exps: Float): Float {
+private fun hitungPengeluaran(inc: Int, exps: Int): Int {
     return inc - exps
 }
 
-private fun shareData(context: Context, message: String, inc: Float, exps: Float, total: Float){
+private fun shareData(context: Context, message: String){
     val shareIntent = Intent(Intent.ACTION_SEND).apply {
         type = "text/plain"
         putExtra(Intent.EXTRA_TEXT, message)
