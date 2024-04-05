@@ -13,9 +13,12 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
@@ -64,7 +67,10 @@ fun MainScreen(){
 @Composable
 fun ScreenContent(modifier: Modifier) {
     var inc by remember { mutableStateOf("") }
+    var incError by remember { mutableStateOf(false) }
+
     var exps by remember { mutableStateOf("") }
+    var expsError by remember { mutableStateOf(false) }
 
     val radioOptions = listOf(
         stringResource(id = R.string.fnd),
@@ -90,6 +96,9 @@ fun ScreenContent(modifier: Modifier) {
             value = inc,
             onValueChange = {inc = it},
             label = { Text(text = stringResource(R.string.income))},
+            isError = incError,
+            trailingIcon = { IconPicker(incError)},
+            supportingText = { ErrorHint(incError)},
             singleLine = true,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
@@ -101,6 +110,9 @@ fun ScreenContent(modifier: Modifier) {
             value = exps,
             onValueChange = {exps = it},
             label = { Text(text = stringResource(R.string.expense))},
+            isError = expsError,
+            trailingIcon = { IconPicker(expsError)},
+            supportingText = { ErrorHint(expsError)},
             singleLine = true,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
@@ -134,6 +146,10 @@ fun ScreenContent(modifier: Modifier) {
         ) {
             Button(
                 onClick = {
+                    incError = (inc == "" || inc == "0")
+                    expsError = (exps == "" || exps == "0")
+                    if (incError || expsError) return@Button
+
                     total = hitungPengeluaran(inc.toFloat(), exps.toFloat())
                 },
                 modifier = Modifier.padding(top = 8.dp),
@@ -163,6 +179,20 @@ fun ScreenContent(modifier: Modifier) {
                 }
             }
         }
+    }
+}
+
+@Composable
+fun IconPicker(isError: Boolean) {
+    if (isError){
+        Icon(imageVector = Icons.Filled.Warning, contentDescription = null)
+    }
+}
+
+@Composable
+fun ErrorHint(isError: Boolean) {
+    if (isError){
+        Text(text = stringResource(R.string.input_invalid))
     }
 }
 
