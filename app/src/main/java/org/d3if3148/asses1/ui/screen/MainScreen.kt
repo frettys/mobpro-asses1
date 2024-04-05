@@ -54,26 +54,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import org.d3if3148.asses1.R
-import org.d3if3148.asses1.model.Gambar
 import org.d3if3148.asses1.navigation.Screen
 import org.d3if3148.asses1.ui.theme.Asses1Theme
-@Composable
-fun Galeri(gambar: Gambar) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Image(
-            painter = painterResource(gambar.imageResId),
-            contentDescription = stringResource(R.string.gambar),
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.size(132.dp)
-        )
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -198,7 +180,7 @@ fun ScreenContent(modifier: Modifier) {
 
                     total = hitungPengeluaran(inc.toInt(), exps.toInt())
                 },
-                modifier = Modifier.padding(top = 8.dp),
+                modifier = Modifier.padding(top = 8.dp, bottom = 16.dp),
                 contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
             ) {
                 Text(text = stringResource(R.string.hitung))
@@ -216,17 +198,28 @@ fun ScreenContent(modifier: Modifier) {
                 if (total <= 50000){
                     Text(
                         textAlign = TextAlign.Center,
-                        // Image(painter = R.drawable._d_man_hand_giving_gold_coin_with_dollar_symbol_9)
                         text = stringResource(R.string.tidak_aman),
                         style = MaterialTheme.typography.titleLarge,
+                        modifier = Modifier.padding(top = 6.dp, bottom = 6.dp)
+                    )
+                    Image(
+                        painter = painterResource(R.drawable._d_man_hand_giving_gold_coin_with_dollar_symbol_9),
+                        contentDescription = stringResource(R.string.gambar, R.string.giving_coin),
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.size(132.dp)
                     )
                 } else {
                     Text(
                         textAlign = TextAlign.Center,
-                        // Image(imageVector = R.drawable.thumb_up)
                         text = stringResource(R.string.aman),
                         style = MaterialTheme.typography.titleLarge,
-
+                        modifier = Modifier.padding(top = 6.dp, bottom = 6.dp)
+                    )
+                    Image(
+                        painter = painterResource(R.drawable._d_render_hand_high_five_gesture_team_work_clap_9),
+                        contentDescription = stringResource(R.string.gambar, R.string.high_five),
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.size(132.dp)
                     )
                 }
                 Button(

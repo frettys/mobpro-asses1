@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Expense Calculator</string>
+    <string name="expense_intro">Let\'s start calculating your expenses with Expense Calculator!</string>
+    <string name="income">Income</string>
+    <string name="expense">Expense</string>
+    <string name="kategori">Expenses category</string>
+    <string name="fnd">Food and Drink</string>
+    <string name="daily">Daily needs</string>
+    <string name="hitung">Calculate expenses</string>
+    <string name="expense_x">Your remaining money: %1$s</string>
+    <string name="aman">Glad to help you!</string>
+    <string name="tidak_aman">You might need to start saving money from now on</string>
+    <string name="input_invalid">Cannot be empty.</string>
+    <string name="tentang_aplikasi">About</string>
+    <string name="copyright">Expense Calculator is an Android application designed to assist you in calculating your daily expenses. It simplifies expense management for you.\nCopyright © 2024. All rights reserved.</string>
+    <string name="kembali">Back</string>
+    <string name="bagikan">Share</string>
+    <string name="bagikan_template">My money: %1$s Total money spent: %2$s Remaining money: %3$s</string>
+    <string name="gambar">Image %1$s</string>
+    <string name="high_five">Safe</string>
+    <string name="giving_coin">Not safe</string>
+</resources>

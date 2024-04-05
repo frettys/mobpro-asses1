@@ -1,17 +1,15 @@
 <resources>
     <string name="app_name">Expense Calculator</string>
-    <string name="expense_intro">Ayo mulai hitung pengeluaranmu dengan
-        Expense Calculator!</string>
+    <string name="expense_intro">Ayo mulai hitung pengeluaranmu dengan         Expense Calculator!</string>
     <string name="income">Pemasukan</string>
     <string name="expense">Pengeluaran</string>
     <string name="kategori">Kategori Pengeluaran</string>
     <string name="fnd">Makanan dan Minuman</string>
     <string name="daily">Kebutuhan sehari-hari</string>
     <string name="hitung">Hitung Pengeluaran</string>
-    <string name="expense_x">Uang Anda sekarang tersisa: \n%1$s</string>
+    <string name="expense_x">Uang Anda sekarang tersisa:  %1$s</string>
     <string name="aman">Senang membantumu!</string>
-    <string name="tidak_aman">Anda mungkin harus berhemat dari \nsekarang!</string>
-    <string name="input_invalid">Tidak boleh kosong.</string>
+    <string name="tidak_aman">Anda mungkin harus berhemat dari  sekarang!</string>
     <string name="tentang_aplikasi">Tentang Aplikasi</string>
     <string name="copyright">Expense Calculator merupakan aplikasi Android
     untuk membantumu dalam menghitung pengeluaran harianmu. Expense Calculator
@@ -19,7 +17,9 @@
     reserved.</string>
     <string name="kembali">Kembali</string>
     <string name="bagikan">Bagikan</string>
-    <string name="bagikan_template">Uang saya: %1$s \nTotal uang yang keluar: %2$s
-    \nSisa uang saya: %3$s</string>
+    <string name="bagikan_template">Uang saya: %1$s  Total uang yang keluar: %2$s      Sisa uang saya: %3$s</string>
     <string name="gambar">Gambar %1$s</string>
+    <string name="high_five">Aman</string>
+    <string name="giving_coin">Tidak aman</string>
+    <string name="input_invalid">Tidak boleh kosong.</string>
 </resources>
