@@ -49,6 +49,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import org.d3if3148.asses1.R
+import org.d3if3148.asses1.model.Gambar
 import org.d3if3148.asses1.navigation.Screen
 import org.d3if3148.asses1.ui.theme.Asses1Theme
 
@@ -84,6 +85,15 @@ fun MainScreen(navController: NavHostController){
         ScreenContent(Modifier.padding(padding))
     }
 }
+
+private fun getData(): List<Gambar>{
+    return listOf(
+        Gambar(R.drawable.thumb_up),
+        Gambar(R.drawable._d_man_hand_giving_gold_coin_with_dollar_symbol_9)
+    )
+}
+
+private val data = getData()
 
 @Composable
 fun ScreenContent(modifier: Modifier) {
