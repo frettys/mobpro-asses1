@@ -15,7 +15,7 @@ interface ExpenseDao {
     @Update
     suspend fun update(calculate: Calculate)
 
-    @Query("SELECT * FROM expense ORDER BY tanggal")
+    @Query("SELECT * FROM expense ORDER BY tanggal DESC")
     fun getExpense(): Flow<List<Calculate>>
 
     @Query("SELECT * FROM expense WHERE id = :id")

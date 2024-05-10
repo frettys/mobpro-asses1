@@ -10,5 +10,6 @@ data class Calculate(
     val masuk: String,
     val keluar: String,
     val kategori: String,
+    val total: Float,
     val tanggal: String
 )

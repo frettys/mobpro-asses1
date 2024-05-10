@@ -25,4 +25,7 @@
     <string name="ubah_pengeluaran">Edit expenses</string>
     <string name="list">List view</string>
     <string name="grid">Grid view</string>
+    <string name="save">Save</string>
+    <string name="lainnya">Others</string>
+    <string name="hapus">Delete</string>
 </resources>

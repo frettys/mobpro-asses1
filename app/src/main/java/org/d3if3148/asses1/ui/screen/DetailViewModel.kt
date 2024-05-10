@@ -12,11 +12,12 @@ import java.util.Locale
 
 class DetailViewModel(private val dao: ExpenseDao) : ViewModel (){
     private val formatter = SimpleDateFormat("yyyy-MM-dd-HH:mm:ss", Locale.US)
-    fun insert(masuk: String, keluar: String, kategori: String){
+    fun insert(masuk: String, keluar: String, kategori: String, total: Float){
         val calculate = Calculate(
             masuk = masuk,
             keluar = keluar,
             kategori = kategori,
+            total = total,
             tanggal = formatter.format(Date())
         )
 
@@ -29,12 +30,13 @@ class DetailViewModel(private val dao: ExpenseDao) : ViewModel (){
         return dao.getExpenseById(id)
     }
 
-    fun update(id: Long, masuk: String, keluar: String, kategori: String){
+    fun update(id: Long, masuk: String, keluar: String, kategori: String, total: Float){
         val calculate = Calculate(
             id = id,
             masuk = masuk,
             keluar = keluar,
             kategori = kategori,
+            total = total,
             tanggal = formatter.format(Date())
         )
 

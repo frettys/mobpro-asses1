@@ -27,5 +27,8 @@
     <string name="ubah_pengeluaran">Ubah pengeluaran</string>
     <string name="list">Tampilan list</string>
     <string name="grid">Tampilan grid</string>
+    <string name="save">Simpan</string>
+    <string name="lainnya">Lainnya</string>
+    <string name="hapus">Hapus</string>
 
 </resources>
