@@ -20,4 +20,9 @@
     <string name="gambar">Image %1$s</string>
     <string name="high_five">Safe</string>
     <string name="giving_coin">Not safe</string>
+    <string name="list_kosong">There is no data.</string>
+    <string name="tambah_pengeluaran">Add expenses</string>
+    <string name="ubah_pengeluaran">Edit expenses</string>
+    <string name="list">List view</string>
+    <string name="grid">Grid view</string>
 </resources>
