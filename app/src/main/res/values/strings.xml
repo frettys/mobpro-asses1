@@ -30,5 +30,7 @@
     <string name="save">Simpan</string>
     <string name="lainnya">Lainnya</string>
     <string name="hapus">Hapus</string>
+    <string name="pesan_hapus">Anda yakin ingin menghapus?</string>
+    <string name="batal">Batal</string>
 
 </resources>

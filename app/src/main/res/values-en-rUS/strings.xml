@@ -28,4 +28,6 @@
     <string name="save">Save</string>
     <string name="lainnya">Others</string>
     <string name="hapus">Delete</string>
+    <string name="pesan_hapus">Are you sure you want to delete?</string>
+    <string name="batal">Cancel</string>
 </resources>

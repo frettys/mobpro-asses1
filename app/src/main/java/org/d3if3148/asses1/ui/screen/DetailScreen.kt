@@ -70,14 +70,11 @@ fun DetailScreen(navController: NavHostController, id: Long? = null){
     var masuk by rememberSaveable { mutableStateOf("") }
     var keluar by rememberSaveable { mutableStateOf("") }
 
-    val radioOptions = listOf(
-        stringResource(id = R.string.fnd),
-        stringResource(id = R.string.daily)
-    )
-
     var kategori by rememberSaveable { mutableStateOf("") }
     var total by rememberSaveable { mutableFloatStateOf(0f)
     }
+
+    var showDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(true){
         if (id == null) return@LaunchedEffect
@@ -134,7 +131,12 @@ fun DetailScreen(navController: NavHostController, id: Long? = null){
                         )
                     }
                     if (id != null){
-                        DeleteAction {
+                        DeleteAction { showDialog = true }
+                        DisplayAlertDialog(
+                            openDialog = showDialog,
+                            onDismissRequest = { showDialog = false}
+                        ) {
+                            showDialog = false
                             viewModel.delete(id)
                             navController.popBackStack()
                         }
@@ -201,7 +203,8 @@ fun FormExpense(
             modifier = Modifier.fillMaxWidth()
         )
         Row(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(top = 6.dp)
                 .border(1.dp, Color.Gray, RoundedCornerShape(4.dp))
         ) {
