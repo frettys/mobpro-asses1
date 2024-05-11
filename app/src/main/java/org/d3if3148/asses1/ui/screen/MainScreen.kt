@@ -1,6 +1,7 @@
 package org.d3if3148.asses1.ui.screen
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -135,6 +136,17 @@ fun ScreenContent(showList: Boolean, modifier: Modifier, navController: NavHostC
     val viewModel : MainViewModel = viewModel(factory = factory)
     val data by viewModel.data.collectAsState()
 
+    var income by remember { mutableIntStateOf(0) }
+    var exps by remember { mutableIntStateOf(0) }
+    var total by remember {
+        mutableIntStateOf(0)
+    }
+
+    income = data.sumOf { it.masuk.toIntOrNull() ?: 0 }
+    exps = data.sumOf { it.keluar.toIntOrNull() ?: 0 }
+
+    total = income - exps
+
     if (data.isEmpty())
     {
         Column(
@@ -145,40 +157,33 @@ fun ScreenContent(showList: Boolean, modifier: Modifier, navController: NavHostC
             horizontalAlignment = Alignment.CenterHorizontally
         )
         {
+            Image(
+                painter = painterResource(R.drawable.gradient_sad_emoji_illustration_23_2150801382_removebg_preview_9),
+                contentDescription = stringResource(R.string.picture)
+            )
             Text(text = stringResource(id = R.string.list_kosong))
         }
     }
     else
     {
-
-        if (showList) {
-            var income by remember { mutableIntStateOf(0) }
-            var exps by remember { mutableIntStateOf(0) }
-            var total by remember {
-                mutableIntStateOf(0)
-            }
-
-            income = data.sumOf { it.masuk.toIntOrNull() ?: 0 }
-            exps = data.sumOf { it.keluar.toIntOrNull() ?: 0 }
-
-            total = income - exps
-
-            Column(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.primary)
-                    .size(84.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.primary)
+                .size(84.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
 
             ) {
-                Text(
-                    text = stringResource(R.string.total, total),
-                    modifier = Modifier,
-                    fontSize = 20.sp,
-                    color = Color.White
-                )
-            }
+            Text(
+                text = stringResource(R.string.total, total),
+                modifier = Modifier,
+                fontSize = 20.sp,
+                color = Color.White
+            )
+        }
+
+        if (showList) {
             LazyColumn(
                 modifier = modifier.fillMaxSize(),
                 contentPadding = PaddingValues(bottom = 84.dp, top = 84.dp)
@@ -194,20 +199,15 @@ fun ScreenContent(showList: Boolean, modifier: Modifier, navController: NavHostC
                     Divider()
                 }
             }
-
-
         }
         else {
-            var total by remember { mutableIntStateOf(0) }
-
-            total = data.sumOf { it.masuk.toIntOrNull() ?: 0 }
 
             LazyVerticalStaggeredGrid(
                 modifier = modifier.fillMaxSize(),
                 columns = StaggeredGridCells.Fixed(2),
                 verticalItemSpacing = 8.dp,
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
-                contentPadding = PaddingValues(8.dp, 8.dp, 8.dp, 84.dp)
+                contentPadding = PaddingValues(8.dp, 92.dp, 8.dp, 84.dp)
             ){
                 items(data){
                     GridItem(calculate = it) {

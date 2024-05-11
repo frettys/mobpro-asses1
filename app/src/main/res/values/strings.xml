@@ -32,6 +32,7 @@
     <string name="hapus">Hapus</string>
     <string name="pesan_hapus">Anda yakin ingin menghapus?</string>
     <string name="batal">Batal</string>
-    <string name="total">Total:   %1$s</string>
+    <string name="total">Total uang Anda sekarang:   %1$s</string>
+    <string name="picture">Emoji sedih</string>
 
 </resources>
