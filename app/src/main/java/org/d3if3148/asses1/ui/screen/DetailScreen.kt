@@ -112,7 +112,7 @@ fun DetailScreen(navController: NavHostController, id: Long? = null){
                 ),
                 actions = {
                     IconButton(onClick = {
-                        if (masuk == "" || keluar == "" || kategori == ""){
+                        if (masuk == "" && keluar == "" || keluar.isNotEmpty() && kategori.isEmpty()){
                             Toast.makeText(context, R.string.input_invalid, Toast.LENGTH_LONG).show()
                             return@IconButton
                         }

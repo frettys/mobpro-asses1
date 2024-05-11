@@ -32,5 +32,6 @@
     <string name="hapus">Hapus</string>
     <string name="pesan_hapus">Anda yakin ingin menghapus?</string>
     <string name="batal">Batal</string>
+    <string name="total">Total:   %1$s</string>
 
 </resources>

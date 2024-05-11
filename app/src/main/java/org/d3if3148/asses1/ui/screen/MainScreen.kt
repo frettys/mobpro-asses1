@@ -1,6 +1,7 @@
 package org.d3if3148.asses1.ui.screen
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
@@ -31,6 +33,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,6 +46,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -116,7 +122,7 @@ fun MainScreen(navController: NavHostController){
             }
         }
     ) { padding ->
-        ScreenContent(showList, Modifier.padding(padding), navController)
+        ScreenContent(showList,Modifier.padding(padding), navController)
     }
 }
 
@@ -144,14 +150,43 @@ fun ScreenContent(showList: Boolean, modifier: Modifier, navController: NavHostC
     }
     else
     {
+
         if (showList) {
+            var income by remember { mutableIntStateOf(0) }
+            var exps by remember { mutableIntStateOf(0) }
+            var total by remember {
+                mutableIntStateOf(0)
+            }
+
+            income = data.sumOf { it.masuk.toIntOrNull() ?: 0 }
+            exps = data.sumOf { it.keluar.toIntOrNull() ?: 0 }
+
+            total = income - exps
+
+            Column(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.primary)
+                    .size(84.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+
+            ) {
+                Text(
+                    text = stringResource(R.string.total, total),
+                    modifier = Modifier,
+                    fontSize = 20.sp,
+                    color = Color.White
+                )
+            }
             LazyColumn(
                 modifier = modifier.fillMaxSize(),
-                contentPadding = PaddingValues(bottom = 84.dp)
+                contentPadding = PaddingValues(bottom = 84.dp, top = 84.dp)
             )
             {
                 items(data)
                 {
+                    Divider()
                     ListItem( calculate =  it)
                     {
                         navController.navigate(Screen.FormUbah.withId(it.id))
@@ -159,8 +194,14 @@ fun ScreenContent(showList: Boolean, modifier: Modifier, navController: NavHostC
                     Divider()
                 }
             }
+
+
         }
         else {
+            var total by remember { mutableIntStateOf(0) }
+
+            total = data.sumOf { it.masuk.toIntOrNull() ?: 0 }
+
             LazyVerticalStaggeredGrid(
                 modifier = modifier.fillMaxSize(),
                 columns = StaggeredGridCells.Fixed(2),
@@ -196,7 +237,8 @@ fun ListItem(
         )
         Text(text = calculate.keluar,
             maxLines = 1,
-            overflow = TextOverflow.Ellipsis
+            overflow = TextOverflow.Ellipsis,
+            fontWeight = FontWeight.Bold
         )
         Text(text = calculate.tanggal)
     }

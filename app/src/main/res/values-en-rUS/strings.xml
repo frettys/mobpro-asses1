@@ -30,4 +30,5 @@
     <string name="hapus">Delete</string>
     <string name="pesan_hapus">Are you sure you want to delete?</string>
     <string name="batal">Cancel</string>
+    <string name="total">Total:   %1$s</string>
 </resources>
